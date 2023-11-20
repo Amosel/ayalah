@@ -1,16 +1,22 @@
 ---
-import { Picture } from 'astro:assets';
-import farm_image from "../../public/farm.jpg"; // Image is 1600x900
-
+import { Image } from "astro:assets";
+import farm_image from "~/assets/images/farm.jpg";
 ---
 
-<div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
-  <Picture
+<!-- <div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
+  <Image
     src={farm_image}
     class="w-full h-auto"
-    sizes="(max-width: 900px) 400px, 900px"
     alt={"Farm"}
-    loading="lazy"
-    decoding="async"
   />
-</div>
+</div> -->
+
+<img
+  class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl"
+  src="/farm.jpg"
+  width="1600"
+  height="900"
+  decoding="async"
+  loading="lazy"
+  alt="A description of my image."
+/>
