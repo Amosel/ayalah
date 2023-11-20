@@ -12,8 +12,10 @@ export const createRSVP = async (formData: RSVPForm) => {
 };
 
 
+export const getRSVP = async (id: string) => supabase.from('rsvps').select("*").eq('id', id).single()
+
 // Example of fetching data from a Supabase table
-export const getRSVP = async () => {
+export const getRSVPs = async () => {
   const { data, error } = await supabase
     .from('rsvps')
     .select('*');

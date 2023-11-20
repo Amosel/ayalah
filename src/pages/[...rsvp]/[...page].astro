@@ -1,6 +1,25 @@
 ---
 import { Icon } from "astro-icon";
 import FarmImage from "../../components/farm-image.astro";
+import { RSVPDB } from "~/schema";
+import { getRSVP } from "~/supabase";
+
+const url = new URL(Astro.request.url);
+
+const id = url.pathname?.split("/")?.pop();
+
+console.log("id", id);
+
+
+if (!id) {
+  return Astro.redirect(`/`, 303);
+} 
+
+const rsvp = (await getRSVP(id)).data as RSVPDB;
+
+if (!rsvp) {
+  return Astro.redirect(`/`, 303);
+} 
 ---
 
 <html lang="en">
@@ -15,7 +34,7 @@ import FarmImage from "../../components/farm-image.astro";
       <div class="container mx-auto px-4 py-6">
         <div class="bg-white p-6 rounded-lg shadow-lg">
           <h1 class="text-4xl text-center text-green-600 font-bold mb-4">
-            Thank You for Your RSVP!
+            Thank You {rsvp.name} for Your RSVP!
           </h1>
           <p class="text-xl text-center mb-4">
             We have received your response and look forward to seeing you at the
