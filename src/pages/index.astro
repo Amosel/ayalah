@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon";
 import FarmImage from "~/components/farm-image.astro";
 import { extractRSVPId } from "~/cookies";
+import { birthday_date } from "~/data";
 
 try {
   const rsvpId = extractRSVPId(Astro.request);
@@ -30,7 +31,7 @@ try {
           <h1 class="text-4xl text-center text-green-600 font-bold mb-4">
             Ayalah’s Barn Party
           </h1>
-          <p class="text-xl text-center mb-4">Sunday, Dec 3rd, 2pm- 6pm</p>
+          <p class="text-xl text-center mb-4">{birthday_date}</p>
           <div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
             <FarmImage />
           </div>

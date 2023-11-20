@@ -1,5 +1,6 @@
 import sgMail from '@sendgrid/mail';
 import { RSVPForm } from './schema';
+import { birthday_date, brithday_address } from './data';
 
 const api_key = import.meta.env.SENDGRID_API_KEY
 sgMail.setApiKey(api_key!);
@@ -9,9 +10,9 @@ export const send_confirmation = async (rsvp: RSVPForm, _: string) => {
     from: 'amosel@gmail.com',
     subject: "Ayalah's brithday RSVP Confirmation",
     dynamic_template_data: {
-      dateAndTime: 'Sunday, Dec 3rd, 2pm- 6pm',
-      address: '2467 Back River Rd, Delancey, NY 13752',
-      encodedAddress: encodeURIComponent('2467 Back River Rd, Delancey, NY 13752')
+      dateAndTime: birthday_date,
+      address: brithday_address,
+      encodedAddress: encodeURIComponent(brithday_address)
     },
     template_id: 'd-e3e60cff1f9b41abbedb2198ecbd01a7'
   };

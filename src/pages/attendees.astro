@@ -1,8 +1,13 @@
 ---
 import { Icon } from "astro-icon";
-import AttendeesList from '../components/attendees-list.astro';
+import AttendeesList from "../components/attendees-list.astro";
 import FarmImage from "~/components/farm-image.astro";
-
+import {
+  birthday_date,
+  birthday_directions_google,
+  brithday_address_casusal,
+  birthday_directions_apple,
+} from "~/data";
 ---
 
 <html lang="en">
@@ -10,7 +15,6 @@ import FarmImage from "~/components/farm-image.astro";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ayalah's 2nd Birthday Barn Party</title>
-    
   </head>
   <body class="bg-blue-50 flex flex-col min-h-screen">
     <div class="flex-grow pb-24 sm:pb-32">
@@ -19,12 +23,12 @@ import FarmImage from "~/components/farm-image.astro";
           <h1 class="text-4xl text-center text-green-600 font-bold mb-4">
             Ayalah’s Barn Party
           </h1>
-          <p class="text-xl text-center mb-4">Sunday, Dec 3rd, 2pm- 6pm</p>
+          <p class="text-xl text-center mb-4">{birthday_date}</p>
           <div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
             <FarmImage />
           </div>
           <p class="text-xl text-center mb-8">
-            Elmaliah Home: 2467 Back River rd, Delancey
+            Elmaliah Home: {brithday_address_casusal}
           </p>
           <div class="text-center mb-4">
             <button
@@ -35,14 +39,14 @@ import FarmImage from "~/components/farm-image.astro";
             </button>
             <div id="mapOptions" class="hidden">
               <a
-                href="https://maps.app.goo.gl/Q8nJEm5ooerivagJ9"
+                href={birthday_directions_google}
                 class="block text-green-600 hover:text-green-800"
                 target="_blank"
               >
                 Open in Google Maps
               </a>
               <a
-                href="http://maps.apple.com/?q=2467+Back+River+Road"
+                href={birthday_directions_apple}
                 class="block text-green-600 hover:text-green-800"
                 target="_blank"
               >
@@ -66,14 +70,19 @@ import FarmImage from "~/components/farm-image.astro";
         </div>
       </div>
     </div>
-    <footer class="bg-gray-800 text-white text-center p-2 sm:p-4 w-full fixed bottom-0 z-20">
+    <footer
+      class="bg-gray-800 text-white text-center p-2 sm:p-4 w-full fixed bottom-0 z-20"
+    >
       <p class="text-white text-lg mb-2 sm:mb-4">
         If you have any questions, feel free to reach out:
       </p>
       <div
         class="flex flex-row justify-center items-center space-x-4 sm:space-x-6 py-2 sm:py-3 px-4 rounded-md"
       >
-        <a href=`tel:${import.meta.env.MY_PHONE_NUMBER}` class="text-white hover:text-gray-300">
+        <a
+          href=`tel:${import.meta.env.MY_PHONE_NUMBER}`
+          class="text-white hover:text-gray-300"
+        >
           <Icon name={"tabler:messages"} class="w-5 h-5" />
         </a>
         <a
@@ -92,5 +101,5 @@ import FarmImage from "~/components/farm-image.astro";
         </a>
       </div>
     </footer>
-      </body>
+  </body>
 </html>
