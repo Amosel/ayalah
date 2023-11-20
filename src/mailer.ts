@@ -20,7 +20,7 @@ export const send_confirmation = async (rsvp: RSVPForm, _: string) => {
     // @ts-ignore
     const response = await sgMail.send(msg);
     // Handle successful email sending
-    console.error(`Sendgrid success ${response[0].statusCode}`);
+    console.log(`Sendgrid success ${response[0].statusCode}, ${msg}`);
   } catch (error) {
     // Handle errors
     console.error(`sendgrid error: ${error}, ${api_key}`);
