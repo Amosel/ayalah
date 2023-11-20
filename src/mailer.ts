@@ -8,8 +8,9 @@ export const send_confirmation = async (rsvp: RSVPForm, _: string) => {
   const msg = {
     to: rsvp.email,
     from: 'amosel@gmail.com',
+    replyTo: 'amosel@gmail.com',
     subject: "Ayalah's brithday RSVP Confirmation",
-    dynamic_template_data: {
+    dynamic_template_data: {    
       dateAndTime: birthday_date,
       address: brithday_address,
       encodedAddress: encodeURIComponent(brithday_address)
