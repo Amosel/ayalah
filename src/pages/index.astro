@@ -2,19 +2,27 @@
 import { Icon } from "astro-icon";
 import FarmImage from "~/components/farm-image.astro";
 import { extractRSVPId } from "~/cookies";
-import { birthday_date } from "~/data";
+import {
+  birthday_date,
+  birthday_directions_apple,
+  birthday_directions_google,
+  brithday_address_casusal,
+} from "~/data";
+import { RSVPDB } from "~/schema";
+import { getRSVP } from "~/supabase";
 
 try {
   const rsvpId = extractRSVPId(Astro.request);
-  console.log(`rsvp, ${rsvpId}`);
-  
-  if (rsvpId) {
+  const _ = (await getRSVP(rsvpId)).data as RSVPDB;
+  if (_) {
+    console.log(`RSVP ID ${rsvpId} found, redirecting to RSVP page`);
     return Astro.redirect(`/rsvp/${rsvpId}`, 303);
-  }  
+  } else if (rsvpId) {
+    console.log(`RSVP ID ${rsvpId} not found, redirecting to RSVP page`);
+  }
 } catch (error) {
   console.error(error);
 }
-
 ---
 
 <html lang="en">
@@ -22,7 +30,6 @@ try {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ayalah's 2nd Birthday Barn Party</title>
-    
   </head>
   <body class="bg-blue-50 flex flex-col min-h-screen">
     <div class="flex-grow pb-24 sm:pb-32">
@@ -32,9 +39,6 @@ try {
             Ayalah’s Barn Party
           </h1>
           <p class="text-xl text-center mb-4">{birthday_date}</p>
-          <div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
-            <FarmImage />
-          </div>
           <div class="text-center my-3">
             <a
               href="#rsvpForm"
@@ -42,20 +46,39 @@ try {
               >RSVP Now</a
             >
           </div>
+          <div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
+            <FarmImage />
+          </div>
+          <div class="mb-8">
+            <p class="text-lg text-center">
+              We welcome all farm friends and animals to join us in
+              celebration of Ayalah’s 2nd trip around the Sun!
+            </p>
+            <p class="text-lg text-center mt-2">
+              Please bring a dish to share, we appreciate any games to play
+              indoors!
+            </p>
+          </div>
           <p class="text-xl text-center mb-8">
-            Elmaliah Home: 2467 Back River rd, Delancey
+            Elmaliah Home: {brithday_address_casusal}
           </p>
           <div class="text-center mb-4">
-            <div class="mb-8">
-              <p class="text-lg text-center">
-                We welcome all farm friends and animals to join us in
-                celebration of Ayalah’s 2nd trip around the Sun!
-              </p>
-              <p class="text-lg text-center mt-2">
-                Please bring a dish to share, we appreciate any games to play
-                indoors!
-              </p>
-            </div>
+            <a
+              href={birthday_directions_google}
+              class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              target="_blank"
+            >
+              Google Maps
+            </a>
+            <a
+              href={birthday_directions_apple}
+              class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4"
+              target="_blank"
+            >
+              Apple Maps
+            </a>
+          </div>
+          <div class="text-center mb-4">
 
             <form
               id="rsvpForm"
