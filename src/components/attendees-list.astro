@@ -1,0 +1,19 @@
+---
+import { getRSVP } from "../supabase";
+let attendees = await getRSVP();
+
+export interface Props {}
+---
+
+<h1>Attendees</h1>
+<ul>
+  {
+    attendees?.map((rsvp) => (
+      <li>
+        Name: {rsvp.name}, Email: {rsvp.email}, Attendees: {rsvp.attendees},
+        Dish: {rsvp.dishes}
+        {rsvp.games ? ", Bringing Games" : ""}
+      </li>
+    ))
+  }
+</ul>

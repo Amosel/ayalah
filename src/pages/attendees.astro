@@ -1,0 +1,96 @@
+---
+import { Icon } from "astro-icon";
+import AttendeesList from '../components/attendees-list.astro';
+import FarmImage from "~/components/farm-image.astro";
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayalah's 2nd Birthday Barn Party</title>
+    
+  </head>
+  <body class="bg-blue-50 flex flex-col min-h-screen">
+    <div class="flex-grow pb-24 sm:pb-32">
+      <div class="container mx-auto px-4 py-6">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <h1 class="text-4xl text-center text-green-600 font-bold mb-4">
+            Ayalah’s Barn Party
+          </h1>
+          <p class="text-xl text-center mb-4">Sunday, Dec 3rd, 2pm- 6pm</p>
+          <div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
+            <FarmImage />
+          </div>
+          <p class="text-xl text-center mb-8">
+            Elmaliah Home: 2467 Back River rd, Delancey
+          </p>
+          <div class="text-center mb-4">
+            <button
+              id="mapToggle"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-2"
+            >
+              Get Directions
+            </button>
+            <div id="mapOptions" class="hidden">
+              <a
+                href="https://maps.app.goo.gl/Q8nJEm5ooerivagJ9"
+                class="block text-green-600 hover:text-green-800"
+                target="_blank"
+              >
+                Open in Google Maps
+              </a>
+              <a
+                href="http://maps.apple.com/?q=2467+Back+River+Road"
+                class="block text-green-600 hover:text-green-800"
+                target="_blank"
+              >
+                Open in Apple Maps
+              </a>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <p class="text-lg text-center">
+              We welcome all farm friends and animals to join us in celebration
+              of Ayalah’s 2nd trip around the Sun!
+            </p>
+            <p class="text-lg text-center mt-2">
+              Please bring a dish to share, we appreciate any games to play
+              indoors!
+            </p>
+          </div>
+
+          <AttendeesList />
+        </div>
+      </div>
+    </div>
+    <footer class="bg-gray-800 text-white text-center p-2 sm:p-4 w-full fixed bottom-0 z-20">
+      <p class="text-white text-lg mb-2 sm:mb-4">
+        If you have any questions, feel free to reach out:
+      </p>
+      <div
+        class="flex flex-row justify-center items-center space-x-4 sm:space-x-6 py-2 sm:py-3 px-4 rounded-md"
+      >
+        <a href=`tel:${import.meta.env.MY_PHONE_NUMBER}` class="text-white hover:text-gray-300">
+          <Icon name={"tabler:messages"} class="w-5 h-5" />
+        </a>
+        <a
+          href="https://t.me/amoselm"
+          class="text-white hover:text-gray-300"
+          target="_blank"
+        >
+          <Icon name={"tabler:brand-telegram"} class="w-5 h-5" />
+        </a>
+        <a
+          href=`https://wa.me/${import.meta.env.MY_PHONE_NUMBER}`
+          class="text-white hover:text-gray-300"
+          target="_blank"
+        >
+          <Icon name={"tabler:brand-whatsapp"} class="w-5 h-5" />
+        </a>
+      </div>
+    </footer>
+      </body>
+</html>
