@@ -31,7 +31,7 @@ export async function POST({ request }: any) {
     const location = `/rsvp/${id}`;
     const url = new URL(request.url);
     url.pathname = location;
-    await onNewRSVP(validatedData, request.url + '/rsvps/');
+    await onNewRSVP(validatedData, request.url + '/attendees/');
     // Redirect to the Thank You page
     return new Response(null, {
       status: 303, // "See Other" status code for redirect after POST
