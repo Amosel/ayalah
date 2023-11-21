@@ -2,33 +2,49 @@
 import Footer from "~/components/footer.astro";
 import Container from "~/components/container.astro";
 import FarmImage from "../../components/farm-image.astro";
+import RSVPFormComponent, {
+  type Props as RSVPFormComponentProps,
+} from "../../components/rsvp-form.astro";
+import CancelFormComponent from "../../components/cancel-form.astro";
 import { RSVPDB } from "~/schema";
-import { getRSVP } from "~/supabase";
+import { getRSVPByEmail } from "~/supabase";
 
 const url = new URL(Astro.request.url);
 
-const id = url.pathname?.split("/")?.pop();
+const email = url.pathname?.split("/")?.pop();
 
-if (!id) {
+if (!email) {
   return Astro.redirect(`/`, 303);
 }
 
-const rsvp = (await getRSVP(id)).data as RSVPDB;
+const rsvp = (await getRSVPByEmail(email)).data as RSVPDB;
 
-console.log("fetching rsvp", id);
+console.log("fetching rsvp for", email);
 if (!rsvp) {
   return Astro.redirect(`/`, 303);
 }
+
+const form_data: RSVPFormComponentProps = {
+  onSubmitTitle: rsvp.iscancelled ? "Resume RSVP" : "Update RSVP",
+  dish: rsvp.dish,
+  games: rsvp.games,
+
+  name: rsvp.name,
+  email: rsvp.email,
+  attendees: rsvp.attendees,
+};
 ---
 
 <Container>
   <div class="flex-grow pb-24 sm:pb-32">
     <div class="container mx-auto px-4 py-6">
       <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h1
-          class="text-4xl text-center text-green-600 font-bold mb-4"
-        >
-          Thank You {rsvp.name} for Your RSVP!
+        <h1 class="text-4xl text-center text-green-600 font-bold mb-4">
+          {
+            rsvp.iscancelled
+              ? "Want to resume?"
+              : `Thank You ${rsvp.name} for Your RSVP!`
+          }
         </h1>
         <p class="text-xl text-center mb-4">
           We have received your response and look forward to seeing you at the
@@ -37,8 +53,10 @@ if (!rsvp) {
         <div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
           <FarmImage />
         </div>
+        <RSVPFormComponent {...form_data} />
+        {!rsvp.iscancelled && <CancelFormComponent email={email} />}
       </div>
     </div>
+    <Footer />
   </div>
-  <Footer />
 </Container>

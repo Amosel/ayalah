@@ -1,0 +1,23 @@
+---
+export interface Props {
+  email: string;
+}
+
+const { email } = Astro.props;
+---
+
+<div class="text-center mb-4">
+  <form
+    id="cancel-rsvp"
+    action="/cancel-rsvp"
+    method="post"
+    class="space-y-4 max-w-md mx-auto w-full"
+  >
+    <input type="hidden" name="email" value={email} />
+    <button
+      type="submit"
+      class="w-full bg-red-300 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+      >Cancel RSVP</button
+    >
+  </form>
+</div>

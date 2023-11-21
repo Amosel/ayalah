@@ -4,7 +4,7 @@ import { birthday_date, brithday_address } from './data';
 
 const api_key = import.meta.env.SENDGRID_API_KEY
 sgMail.setApiKey(api_key!);
-export const send_confirmation = async (rsvp: RSVPForm, _: string) => {
+export const send_rsvp_confirmation_email = async (rsvp: RSVPForm, _: string) => {
   const msg = {
     to: rsvp.email,
     from: 'amosel@gmail.com',

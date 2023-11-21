@@ -1,6 +1,6 @@
 ---
 import { getRSVPs } from "../supabase";
-let attendees = await getRSVPs();
+let attendees = await getRSVPs()
 
 export interface Props {}
 ---
@@ -14,7 +14,7 @@ export interface Props {}
           <div class="font-semibold text-lg">{rsvp.name}</div>
           <div class="text-gray-600">Email: {rsvp.email}</div>
           <div class="text-gray-600">Attendees: {rsvp.attendees}</div>
-          <div class="text-gray-600">Dish: {rsvp.dishes}</div>
+          <div class="text-gray-600">Dish: {rsvp.dish}</div>
           {rsvp.games && <div class="text-green-500">Bringing Games</div>}
         </li>
       ))

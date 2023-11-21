@@ -5,7 +5,7 @@ export const rsvpFormSchema = z.object({
   email: z.string().email("Invalid email address"),
   attendees: z.number().max(10).or(
     z.string().refine((val) => parseInt(val), { message: "Please select a number of attendees" })),
-  dishes: z.string().optional().default("none"), // Assuming dishes is optional
+  dish: z.string().optional().default("none"), // Assuming dish is optional
   games: z.string().optional().default("none").transform(t => t === "on"),
 });
 
@@ -13,8 +13,9 @@ export const rsvpDBSchema = z.object({
   name: z.string(),
   email: z.string(),
   attendees: z.number(),
-  dishes: z.string(),
+  dish: z.string(),
   games: z.boolean(),
+  iscancelled: z.boolean().default(false),
 });
 
 export type RSVPDB = z.infer<typeof rsvpDBSchema>;
