@@ -1,71 +1,18 @@
 ---
-import { Icon } from "astro-icon";
+import Footer from "~/components/footer.astro";
+import Container from "~/components/container.astro";
 import FarmImage from "~/components/farm-image.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>We must have gotten something wrong...</title>
-    
-  </head>
-  <body class="bg-blue-50 flex flex-col min-h-screen">
-    <div class="flex-grow pb-24 sm:pb-32">
-      <div class="container mx-auto px-4 py-6">
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-          <div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
-            <FarmImage />
-          </div>
+<Container>
+  <div class="flex-grow pb-24 sm:pb-32">
+    <div class="container mx-auto px-4 py-6">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
+          <FarmImage />
         </div>
       </div>
     </div>
-    <footer
-      class="bg-gray-800 text-white text-center p-2 sm:p-4 w-full fixed bottom-0 z-20"
-    >
-      <p class="text-white text-lg mb-2 sm:mb-4">
-        If you have any questions, feel free to reach out:
-      </p>
-      <div
-        class="flex flex-row justify-center items-center space-x-4 sm:space-x-6 py-2 sm:py-3 px-4 rounded-md"
-      >
-        <a
-          href=`tel:${import.meta.env.MY_PHONE_NUMBER}`
-          class="text-white hover:text-gray-300"
-        >
-          <Icon name={"tabler:messages"} class="w-5 h-5" />
-        </a>
-        <a
-          href="https://t.me/amoselm"
-          class="text-white hover:text-gray-300"
-          target="_blank"
-        >
-          <Icon name={"tabler:brand-telegram"} class="w-5 h-5" />
-        </a>
-        <a
-          href=`https://wa.me/${import.meta.env.MY_PHONE_NUMBER}`
-          class="text-white hover:text-gray-300"
-          target="_blank"
-        >
-          <Icon name={"tabler:brand-whatsapp"} class="w-5 h-5" />
-        </a>
-      </div>
-    </footer>
-  </body>
-</html>
-
-<html>
-  <head>
-    <title>Thank You!</title>
-    <!-- Include any additional head elements here -->
-  </head>
-  <body>
-    <h1>Thank You for Your RSVP!</h1>
-    <p>
-      We have received your response and look forward to seeing you at the
-      party!
-    </p>
-    <!-- You can add more content or links here, like a link back to the home page -->
-    <a href="/">Return to Home</a>
-  </body>
-</html>
+  </div>
+  <Footer />
+</Container>
