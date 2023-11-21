@@ -5,15 +5,19 @@ let attendees = await getRSVPs();
 export interface Props {}
 ---
 
-<h1>Attendees</h1>
-<ul>
-  {
-    attendees?.map((rsvp) => (
-      <li>
-        Name: {rsvp.name}, Email: {rsvp.email}, Attendees: {rsvp.attendees},
-        Dish: {rsvp.dishes}
-        {rsvp.games ? ", Bringing Games" : ""}
-      </li>
-    ))
-  }
-</ul>
+<div class="container mx-auto px-4 py-6">
+  <h1 class="text-2xl font-bold text-center mb-4">Attendees</h1>
+  <ul class="list-none space-y-3">
+    {
+      attendees?.map((rsvp) => (
+        <li class="border border-gray-200 rounded-lg p-4 shadow-sm">
+          <div class="font-semibold text-lg">{rsvp.name}</div>
+          <div class="text-gray-600">Email: {rsvp.email}</div>
+          <div class="text-gray-600">Attendees: {rsvp.attendees}</div>
+          <div class="text-gray-600">Dish: {rsvp.dishes}</div>
+          {rsvp.games && <div class="text-green-500">Bringing Games</div>}
+        </li>
+      ))
+    }
+  </ul>
+</div>
