@@ -1,9 +1,9 @@
----
-// import { Image } from "astro:assets";
-// import farm_image from "~/assets/images/farm.jpg";
+<!-- ---
+import { Image } from "astro:assets";
+import farm_image from "~/assets/images/farm.jpg";
 ---
 
-<!-- <div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
+<div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
   <Image
     src={farm_image}
     class="w-full h-auto"
@@ -11,12 +11,14 @@
   />
 </div> -->
 
-<img
-  class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl"
-  src="/farm.jpg"
-  width="1600"
-  height="900"
-  decoding="async"
-  loading="lazy"
-  alt="A description of my image."
-/>
+<div class="my-4 mx-auto max-w-md md:max-w-lg lg:max-w-xl">
+  <img
+    class="w-full h-auto"
+    src="/farm.jpg"
+    width="1429"
+    height="1129"
+    decoding="async"
+    loading="lazy"
+    alt="A description of my image."
+  />
+</div>
