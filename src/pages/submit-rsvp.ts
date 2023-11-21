@@ -5,7 +5,7 @@ import { onNewRSVP } from '../telegram';
 import { appendRSVPEmail } from '~/cookies';
 
 // Handler for POST request
-export async function POST({ request }: any) {
+export async function POST({ request }: { request: Request }) {
   const formData = await request.formData();
   const rsvp = Object.fromEntries(formData);
 
@@ -14,7 +14,7 @@ export async function POST({ request }: any) {
     const id = (await createRSVP(validatedData)).id;
     // Save the validated data and send notification
     await send_rsvp_confirmation_email(validatedData, id);
-    await onNewRSVP(validatedData, request.url + '/rsvp/');
+    await onNewRSVP(validatedData, request.url.replace("submit-rsvp", "/rsvp/"));
     // Redirect to the Thank You page
     return new Response(null, {
       status: 303, // "See Other" status code for redirect after POST

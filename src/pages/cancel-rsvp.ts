@@ -7,7 +7,7 @@ const schema = z.object({
   email: z.string().email(),
 });
 
-export async function POST({ request }: any) {
+export async function POST({ request }: { request: Request }) {
   try {
     // Validate the data with Zod
     let { email } = schema.parse(
@@ -18,7 +18,7 @@ export async function POST({ request }: any) {
 
     // If validation is successful, process the form submission (e.g., cancel RSVP)
     cancelRSVP(email);
-    await onRSVPCancelled(email, request.url + '/attendees/');
+    await onRSVPCancelled(email, request.url.replace("cancel-rsvp", "rsvps"));
     return new Response(null, {
       status: 303, // "See Other" status code for redirect after POST
       headers: {
@@ -32,7 +32,7 @@ export async function POST({ request }: any) {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
-      
+
     } else {
       // Handle other errors as needed
       return new Response('An unexpected error occurred', {
