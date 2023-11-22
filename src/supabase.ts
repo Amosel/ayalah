@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { RSVPDB, rsvpDBSchema, type RSVPForm } from "./schema";
+import { RSVPDB, rsvpDBSchema, toRsvpRecord, type RSVPForm } from "./schema";
 
 const supabaseUrl = "https://gdefxrolcugbudbphmmm.supabase.co";
 export const supabase = createClient(supabaseUrl, import.meta.env.SUPABASE_KEY);
@@ -7,32 +7,30 @@ export const supabase = createClient(supabaseUrl, import.meta.env.SUPABASE_KEY);
 export const createRSVP = async (formData: RSVPForm) => {
   const { error, data } = await supabase
     .from("rsvps")
-    .upsert([
-      rsvpDBSchema.parse({
-        ...formData,
-        attendees: parseInt(formData.attendees.toString()),
-        iscancelled: false,
-      })
-    ], { onConflict: "email" })
+    .upsert(
+      [
+        toRsvpRecord(formData),
+      ],
+      { onConflict: "email" },
+    )
     .select();
   if (error) {
     throw new Error(error.message);
   }
-  return (data.find((rsvp: any) => !!rsvp) as RSVPDB & { id: string })
+  return data.find((rsvp: any) => !!rsvp) as RSVPDB & { id: string };
 };
 
-
-export const getRSVPByEmail = async (email: string) => supabase.from('rsvps').select("*").eq('email', email).single()
-export const getRSVP = async (id: string) => supabase.from('rsvps').select("*").eq('id', id).single()
+export const getRSVPByEmail = async (email: string) =>
+  supabase.from("rsvps").select("*").eq("email", email).single();
+export const getRSVP = async (id: string) =>
+  supabase.from("rsvps").select("*").eq("id", id).single();
 
 // Example of fetching data from a Supabase table
 export const getRSVPs = async () => {
-  const { data, error } = await supabase
-    .from('rsvps')
-    .select('*');
+  const { data, error } = await supabase.from("rsvps").select("*");
 
   if (error) {
-    console.error('Error fetching data:', error);
+    console.error("Error fetching data:", error);
     return null;
   }
 
@@ -48,9 +46,9 @@ export const cancelRSVP = async (email: string): Promise<void> => {
   try {
     // Fetch the RSVP data based on the email
     let response = await supabase
-      .from('rsvps')
-      .select('*')
-      .eq('email', email)
+      .from("rsvps")
+      .select("*")
+      .eq("email", email)
       .single();
 
     if (response.error) {
@@ -59,23 +57,20 @@ export const cancelRSVP = async (email: string): Promise<void> => {
 
     // Update the RSVP to set it as cancelled
     response = await supabase
-      .from('rsvps')
+      .from("rsvps")
       .update({ iscancelled: true })
-      .eq('email', email);
+      .eq("email", email);
 
     if (response.error) {
       throw new Error(`setting isCancelled on RSVP failed. ${response.error}`);
     } else {
       console.log(`RSVP for ${email} has been cancelled.`);
     }
-
   } catch (error) {
-    console.error('Error cancelling RSVP:', error);
+    console.error("Error cancelling RSVP:", error);
     throw error;
   }
 };
-
-
 
 // CREATE TABLE rsvps (
 //   id SERIAL PRIMARY KEY,
