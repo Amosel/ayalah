@@ -5,7 +5,7 @@
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"
-      },
+      }
     ],
     "strictNullChecks": true,
     "allowJs": true,
@@ -16,5 +16,5 @@
       "~/*": ["src/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "test/**/*"]
 }
