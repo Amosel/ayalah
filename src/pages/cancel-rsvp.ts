@@ -1,7 +1,7 @@
 // Import necessary dependencies
 import { z } from 'zod';
 import { cancelRSVP } from '~/supabase';
-import { onRSVPCancelled } from '~/telegram';
+import { Telegram } from '~/telegram';
 
 const schema = z.object({
   email: z.string().email(),
@@ -18,7 +18,7 @@ export async function POST({ request }: { request: Request }) {
 
     // If validation is successful, process the form submission (e.g., cancel RSVP)
     cancelRSVP(email);
-    await onRSVPCancelled(email, request.url.replace("cancel-rsvp", "rsvps"));
+    await Telegram.onRSVPCancelled(email, request.url.replace("cancel-rsvp", "rsvps"));
     return new Response(null, {
       status: 303, // "See Other" status code for redirect after POST
       headers: {
