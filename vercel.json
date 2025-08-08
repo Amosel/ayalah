@@ -1,7 +1,4 @@
 {
   "buildCommand": "bun run build",
-  "installCommand": "bun install",
-  "functions": {
-    "**/*.mjs": { "runtime": "bun" }
-  }
+  "installCommand": "bun install"
 }
