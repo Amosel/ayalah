@@ -1,10 +1,7 @@
 {
-  "installCommand": "bun install",
   "buildCommand": "bun run build",
-  "devCommand": "bun run dev",
+  "installCommand": "bun install",
   "functions": {
-    "**/*.ts": {
-      "runtime": "bun"
-    }
+    "**/*.mjs": { "runtime": "bun" }
   }
 }
