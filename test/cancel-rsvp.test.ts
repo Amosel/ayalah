@@ -16,7 +16,15 @@ describe("POST Endpoint for Cancel RSVP", () => {
     const singleMock = vi.fn().mockReturnValueOnce(dbResponse);
     const eqMock = vi.fn().mockReturnValueOnce({ single: singleMock });
     const selectMock = vi.fn().mockReturnValueOnce({ eq: eqMock });
-    const fromMock = vi.spyOn(supabase, 'from').mockImplementationOnce(() => ({ select: selectMock }));
+    const fromMock = vi.spyOn(supabase, 'from').mockImplementationOnce(() => ({
+      select: selectMock,
+      url: new URL('http://example.com'),
+      headers: {},
+      insert: vi.fn(),
+      upsert: vi.fn(),
+      update: vi.fn(),
+      delete: vi.fn()
+    } as any));
 
     // Mock Telegram
     const mockFetch = vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve({}) });

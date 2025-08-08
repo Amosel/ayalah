@@ -1,11 +1,9 @@
-import { describe, it, expect, vi, afterEach, assert } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import sgrid from '@sendgrid/mail';
-import { createClient } from '@supabase/supabase-js';
 import { RSVPForm, toFormData, toRsvpRecord } from "~/schema";
 import { supabase } from '~/supabase'
 import { email_template, telegran_new_rsvp_template } from "~/data";
 import { POST as submit_rsvp } from "~/pages/submit-rsvp"; // Adjust the import path for your endpoint
-import { POST as cancel_rsvp } from "~/pages/cancel-rsvp"; // Adjust the import path for your endpoint
 
 const baseUrl = "http://example.com"
 const email = "jane@example.com";

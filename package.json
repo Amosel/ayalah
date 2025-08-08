@@ -29,5 +29,8 @@
     "@types/cookie": "^0.5.4",
     "@types/nodemailer": "^6.4.14",
     "vitest": "^0.34.6"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
   }
 }

@@ -1,5 +1,5 @@
 import { send_rsvp_confirmation_email } from "~/mailer";
-import { fromFormData, rsvpFormSchema } from "~/schema";
+import { fromFormData } from "~/schema";
 import { createRSVP } from "~/supabase";
 import { Telegram } from "~/telegram";
 import { appendRSVPEmail } from "~/cookies";
@@ -26,7 +26,8 @@ export async function POST({ request }: { request: Request }) {
     });
   } catch (error) {
     console.error("Error processing RSVP", error);
-    return new Response("failed " + JSON.stringify({ error: error.message }), {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+    return new Response("failed " + JSON.stringify({ error: errorMessage }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
     });

@@ -7,6 +7,7 @@ export default defineConfig({
   output: 'server',
   integrations: [tailwind()],
   adapter: vercel({
+    runtime: 'bun',
     webAnalytics: {
       enabled: true,
       imageService: false,
